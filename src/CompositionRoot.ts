@@ -2,7 +2,7 @@ import { Bot } from "./Bot"
 import { ChatGPTClient } from "./ChatGPT/ChatGPTClient"
 import { NetworkService } from "./NetworkService/NetworkService"
 import { NetworkServiceLive } from "./NetworkService/NetworkServiceLive"
-import { SlackClient } from "./SlackClient"
+import { SlackClient } from "./Slack/SlackClient"
 import { SlackEventsEndpoint } from "./Endpoints/SlackEventsEndpoint"
 import { SlackShortcutsEndpoint } from "./Endpoints/SlackShortcutsEndpoint"
 

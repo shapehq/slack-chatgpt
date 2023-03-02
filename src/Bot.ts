@@ -1,5 +1,5 @@
 import { ChatGPTClient } from "./ChatGPT/ChatGPTClient"
-import { SlackClient } from "./SlackClient"
+import { SlackClient } from "./Slack/SlackClient"
 
 export class Bot {
   chatGPTClient: ChatGPTClient
