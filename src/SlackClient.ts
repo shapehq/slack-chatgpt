@@ -1,4 +1,4 @@
-import { NetworkService } from "../NetworkService/NetworkService"
+import { NetworkService } from "./NetworkService/NetworkService"
 
 export class SlackClient {
   networkService: NetworkService
