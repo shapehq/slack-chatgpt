@@ -11,7 +11,7 @@ Follow the steps below to get started.
 
 The Slack app was built to be hosted on Cloudflare Workers, and as such, we will need to create a worker on Cloudflare Workers.
 
-1. Go to (https://workers.cloudflare.com) and create a worker. Choose any name you would like.
+1. Go to [https://workers.cloudflare.com](https://workers.cloudflare.com) and create a worker. Choose any name you would like.
 2. Take note of the URL of your worker as you will need it when creating a Slack app.
 
 Cloudflare's [wrangler](https://github.com/cloudflare/workers-sdk/tree/main/packages/wrangler) CLI is used to deploy, update, and monitor Cloudflare workers. We will need the CLI later so make sure to install it by running the following command.
