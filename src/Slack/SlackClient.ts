@@ -27,7 +27,6 @@ export class SlackClient {
     }, {
       "Authorization": "Bearer " + this.token
     })
-    console.log(JSON.stringify(response, null, 2))
     this.processResponse(response)
   }
   
@@ -38,7 +37,6 @@ export class SlackClient {
     }, {
       "Authorization": "Bearer " + this.token
     })
-    console.log(JSON.stringify(response, null, 2))
     this.processResponse(response)
   }
   

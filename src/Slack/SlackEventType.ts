@@ -3,4 +3,7 @@ export const SlackEventType = {
   EVENT_CALLBACK: "event_callback",
   APP_MENTION: "app_mention",
   MESSAGE: "message",
+  SHORTCUT: "shortcut",
+  BLOCK_ACTIONS: "block_actions",
+  VIEW_SUBMISSION: "view_submission"
 }

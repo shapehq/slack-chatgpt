@@ -14,7 +14,6 @@ export async function verifySlackSignature(request: Request, signingSecret: stri
   const content = await request.text()
   const authString = `${SIGN_VERSION}:${timestamp}:${content}`
   let encoder = new TextEncoder()
-  console.log("DASD")
   const key = await crypto.subtle.importKey(
     "raw",
     encoder.encode(signingSecret),
@@ -22,7 +21,6 @@ export async function verifySlackSignature(request: Request, signingSecret: stri
     false,
     ["verify"]
   )
-  console.log("GASD")
   return await crypto.subtle.verify(
     "HMAC",
     key,

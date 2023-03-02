@@ -11,7 +11,7 @@ export class SlackEventsEndpoint implements Endpoint {
     this.bot = bot
   }
   
-  async fetch(request: Request): Promise<Response> {
+  async fetch(request: Request, ctx: ExecutionContext): Promise<Response> {
    if (request.method == "POST") {
      return await this.handlePostRequest(request)
    } else {

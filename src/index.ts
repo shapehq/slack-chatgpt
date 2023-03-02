@@ -12,7 +12,7 @@ export default {
       const clonedRequest = await request.clone()
       const isSlackSignatureVerified = await verifySlackSignature(clonedRequest, env.SLACK_SIGNING_SECRET)
       if (isSlackSignatureVerified) {
-        return await endpoint.fetch(request)
+        return await endpoint.fetch(request, ctx)
       } else {
         return ResponseFactory.unauthorized("The Slack signature is invalid")
       }
