@@ -1,6 +1,7 @@
-# slack-chatgpt
-
-Integrate ChatGPT into Slack using a Slack app hosted on [Cloudflare Workers](https://workers.cloudflare.com).
+<div align="center">
+<img src="./screenshot.png" width="700" alt="A screenshot of a conversation between a person and ChatGPT">
+<h3>Integrate <a href="https://openai.com/blog/chatgpt" target="_blank">ChatGPT</a> into Slack using a Slack app hosted on <a href="https://workers.cloudflare.com" target="_blank">Cloudflare Workers</a>.</h3>
+</div>
 
 ## 🚀 Getting Started
 
