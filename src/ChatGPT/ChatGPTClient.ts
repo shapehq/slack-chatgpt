@@ -20,10 +20,8 @@ export class ChatGPTClient {
     const headers = {
       "Authorization": "Bearer " + this.apiKey
     }
-    console.log("Will ask ChatGPT...")
     try {
       const response = await this.networkService.post(url, body, headers)
-      console.log(response)
       if ("error" in response) {
         throw new Error(response.error.message)
       } else if ("choices" in response && response.choices.length > 0) {

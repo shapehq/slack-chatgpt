@@ -11,7 +11,6 @@ export class SlackRequestHandler {
   
   async handle(request: Request): Promise<Response> {
     const body = await readRequestBody(request)
-    console.log(JSON.stringify(body, null, 2))
     if (body.type == "url_verification") {
       return new Response(body.challenge)
     } else if (body.type == "event_callback") {
