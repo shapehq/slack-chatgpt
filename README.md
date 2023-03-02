@@ -40,6 +40,7 @@ The Slack app will be used to listen for request in Slack and post messages back
 6. Add the Bots feature to the Slack app.
 7. Add the `app_mentions:read`, `chat:write`, `commands`, `im:history`, and `chat:write.public` scopes to the bot.
 8. Take note of the bot's OAuth token. This is used to post messages back into Slack.
+9. Finally, take note of the signing secret. We will need this later to verify that requests are coming from Slack.
 
 ### Add Your Secrets to the Cloudflare Worker
 
@@ -55,6 +56,12 @@ Then add your bot's token running the following command. Paste the token when pr
 
 ```bash
 wrangler secret put SLACK_TOKEN
+```
+
+Finally add the Slack signing secret. Paste the secret when prompted to enter it.
+
+```bash
+wrangler secret put SLACK_SIGNING_SECRET
 ```
 
 ### Deploy to Cloudflare
@@ -74,6 +81,7 @@ To run the project locally, you will need to create a file named `.dev.vars` tha
 ```
 OPENAI_API_KEY=xxx
 SLACK_TOKEN=xxx
+SLACK_SIGNING_SECRET=xxx
 ```
 
 Remember to replace the OpenAI API key and Slack token with your actual credentials.

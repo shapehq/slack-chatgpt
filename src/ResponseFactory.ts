@@ -12,4 +12,11 @@ export class ResponseFactory {
       statusText: "Internal Server Error"
     })
   }
+  
+  static unauthorized(message: string): Response {
+    return new Response(message, {
+      status: 401, 
+      statusText: "Unauthorized"
+    })
+  }
 }
