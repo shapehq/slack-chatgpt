@@ -65,7 +65,7 @@ npx wrangler publish
 
 ChatGPT should now be integrated with your Slack workspace.
 
-## Running the Project Locally
+## 💻 Running the Project Locally
 
 To run the project locally, you will need to create a file named `.dev.vars` that contains your secrets. The content of the file should be as shown below.
 
