@@ -83,6 +83,8 @@ Then start the server by running the following command.
 npx wrangler dev
 ```
 
-## 🙊 Provided As Is
+## Built with ❤️ by [Shape](https://shape.dk)
 
-The software is provided as is. We built slack-chatgpt at Shape in a couple of hours to try out the ChatGPT APIs when they were published on March 1st, 2023 and are now having a great time asking ChatGPT both serious and silly questions in our Slack 😄
+We built slack-chatgpt at Shape in a couple of hours to try out the ChatGPT APIs when they were published on March 1st, 2023 and are now having a great time asking ChatGPT both serious and silly questions in our Slack 😄
+
+Want to build cool and fun products with us? [We are hiring](https://careers.shape.dk)! 😃🫶
