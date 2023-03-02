@@ -11,10 +11,7 @@ export class Bot {
   }
   
   async postReply(prompt: string, channel: string, threadTs: string | null) {
-    const chatGPTResponse = await this.chatGPTClient.getResponse([
-      {"role": "system", "content": "You are a helpful assistant."},
-      {"role": "user", "content": prompt}
-    ])
+    const chatGPTResponse = await this.chatGPTClient.getResponse(prompt)
     await this.slackClient.postMessage(chatGPTResponse.content, channel, threadTs)
   }
 }

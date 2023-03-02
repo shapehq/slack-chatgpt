@@ -11,11 +11,14 @@ export class ChatGPTClient {
     this.apiKey = apiKey
   }
   
-  async getResponse(messages: ChatGPTMessage[]): Promise<ChatGPTResponse> {
+  async getResponse(prompt: string): Promise<ChatGPTResponse> {
     const url = "https://api.openai.com/v1/chat/completions"
     const body = {
       model: "gpt-3.5-turbo",
-      messages: messages
+      messages: [
+        {"role": "system", "content": "You are a helpful assistant."},
+        {"role": "user", "content": prompt}
+      ]
     }
     const headers = {
       "Authorization": "Bearer " + this.apiKey
