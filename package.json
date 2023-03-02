@@ -1,0 +1,18 @@
+{
+  "name": "slack-chatgpt",
+  "version": "0.0.0",
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20230228.0",
+    "typescript": "^4.9.5",
+    "wrangler": "2.6.0"
+  },
+  "private": true,
+  "scripts": {
+    "start": "wrangler dev",
+    "deploy": "wrangler publish"
+  },
+  "dependencies": {
+    "@slack/web-api": "^6.8.1",
+    "openai": "^3.2.1"
+  }
+}
