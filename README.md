@@ -24,7 +24,7 @@ npm install -g wrangler
 
 You will need an OpenAI account to access the ChatGPT API.
 
-1. Register for an account on [platform.openai.com](platform.openai.com).
+1. Register for an account on [platform.openai.com](https://platform.openai.com).
 2. Add billing information to your account if you have already used your free credits or they have expired.
 3. Generate an API key and save it for later.
 
