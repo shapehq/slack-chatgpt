@@ -39,7 +39,7 @@ export class SlackEventsEndpoint implements Endpoint {
     } else if (event.type == "message") {
       if (event.bot_profile == null) {
         // Make sure the message was not sent by a bot. If we do not have this check the bot will keep a conversation going with itself.
-        await this.bot.postReply(event.text, event.channel, event.ts)
+        await this.bot.postReply(event.text, event.channel, null)
       }
     } else {
       throw new Error("Unexpected Slack event of type " + event.type)
