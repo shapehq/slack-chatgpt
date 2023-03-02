@@ -1,31 +1,27 @@
-import { ChatGPTClient } from "./ChatGPT/ChatGPTClient"
+import { CompositionRoot } from "./CompositionRoot"
+import { Endpoint } from "./Endpoints/Endpoint"
 import { Env } from "./Env"
-import { NetworkServiceLive } from "./NetworkService/NetworkServiceLive"
 import { ResponseFactory } from "./ResponseFactory"
-import { SlackClient } from "./Slack/SlackClient"
-import { SlackEventCallbackHandler } from "./RequestHandling/SlackEventCallbackHandler"
-import { SlackRequestHandler } from "./RequestHandling/SlackRequestHandler"
 
 export default {
   async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
-    if (request.method == "POST") {
-      try {
-        const networkService = new NetworkServiceLive()
-        const chatGPTClient = new ChatGPTClient(networkService, env.OPENAI_API_KEY)
-        const slackClient = new SlackClient(networkService, env.SLACK_TOKEN)
-        const eventCallbackHandler = new SlackEventCallbackHandler(chatGPTClient, slackClient)
-        const requestHandler = new SlackRequestHandler(eventCallbackHandler)
-        return await requestHandler.handle(request)
-      } catch (error) {
-        console.log(error)
-        if (error instanceof Error) {
-          return ResponseFactory.internalServerError(error.toString())
-        } else {
-          return ResponseFactory.internalServerError("Unknown error")
-        }
-      }
+    const url = new URL(request.url)
+    const endpoint = getEndpoint(url.pathname, env)
+    if (endpoint != null) {
+      return await endpoint.fetch(request)
     } else {
-      return ResponseFactory.badRequest("Unsupported HTTP method: " + request.method)
+      return ResponseFactory.badRequest("Unknown path: " + url.pathname)
     }
+  }
+}
+
+function getEndpoint(pathname: string, env: Env): Endpoint | null {
+  const pathComponents = pathname.slice(1).split("/").filter(e => e.length > 0)
+  if (pathComponents.length == 1 && pathComponents[0] == "events") {
+    return CompositionRoot.getSlackEventsEndpoint(env.OPENAI_API_KEY, env.SLACK_TOKEN)
+  } else if (pathComponents.length == 1 && pathComponents[0] == "shortcuts") {
+    return CompositionRoot.getSlackShortcutsEndpoint(env.OPENAI_API_KEY, env.SLACK_TOKEN)
+  } else {
+    return null
   }
 }
