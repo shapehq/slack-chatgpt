@@ -35,6 +35,7 @@ The Slack app will be used to listen for request in Slack and post messages back
 1. Create a Slack app [here](https://api.slack.com/apps).
 2. Enable Event Subscriptions and specify the URL to your Cloudflare Worker followed by the path `/events`, e.g. `https://slack-chatgpt.simonbs.workers.dev/events`.
 3. Subscribe to the `app_mention` and `message.im` event names.
+4. Enable Interactivity and specify the URL to your Cloudflare Worker followed by the path `/shortcuts`, e.g. `https://slack-chatgpt.simonbs.workers.dev/shortcuts`.
 4. Add the Bots feature to the Slack app.
 5. Add the `app_mentions:read`, `chat:write`, and `im:history` scopes to the bot.
 6. Take note of the bot's OAuth token. This is used to post messages back into Slack.
