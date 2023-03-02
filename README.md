@@ -1,5 +1,5 @@
 <div align="center">
-<img src="./screenshot.png" width="700" alt="A screenshot of a conversation between a person and ChatGPT">
+<img src="./screenshot.jpeg" width="700" alt="Screenshot of a conversation between a person and ChatGPT">
 <h3>Integrate <a href="https://openai.com/blog/chatgpt" target="_blank">ChatGPT</a> into Slack using a Slack app hosted on <a href="https://workers.cloudflare.com" target="_blank">Cloudflare Workers</a>.</h3>
 </div>
 
@@ -85,4 +85,4 @@ npx wrangler dev
 
 ## 🙊 Provided As Is
 
-slack-chatgpt is provided as is. We built this at Shape in a couple of hours to try out the ChatGPT APIs when they were published on March 1st, 2023 and are now having a great time asking ChatGPT both serious and silly questions in our Slack 😄
+The software is provided as is. We built slack-chatgpt at Shape in a couple of hours to try out the ChatGPT APIs when they were published on March 1st, 2023 and are now having a great time asking ChatGPT both serious and silly questions in our Slack 😄
