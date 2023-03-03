@@ -1,7 +1,42 @@
 <div align="center">
-<img src="./screenshot.jpeg" width="700" alt="Screenshot of a conversation between a person and ChatGPT">
+<img src="./screenshots/header.jpeg" width="700" alt="Screenshot of a conversation between a person and ChatGPT" />
 <h3>Integrate <a href="https://openai.com/blog/chatgpt" target="_blank">ChatGPT</a> into Slack using a Slack app hosted on <a href="https://workers.cloudflare.com" target="_blank">Cloudflare Workers</a>.</h3>
-</div>
+
+✨ Features&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;🚀 Getting Started&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;💻 Running the Project Locally&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;Built with ❤️ by Shape</div>
+
+## ✨ Features
+
+slack-chatgpt can be used to interact with ChatGPT in several ways on Slack.
+
+#### Mentions
+
+When mentioning the bot, it will post a reply in a thread so it does not clutter the conversation.
+
+<img src="./screenshots/mention.png" width="500" />
+
+#### Direct Messages
+
+People in the workspace can write messages messages to the bot in which case it replies directly within the conversation.
+
+<img src="./screenshots/dm.png" width="500" />
+
+#### Slash Command
+
+Use the slash command to ask ChatGPT a question and have it reply within the conversation.
+
+<img src="./screenshots/command.png" width="300" />
+
+#### Shortcut on Message
+
+The shortcut on messages can be used to answer a message using ChatGPT.
+
+<img src="./screenshots/shortcut-on-message.png" width="500" />
+
+#### Global Shortcut
+
+The global shortcut can be used to have ChatGPT help you write a message and then send that message to a channel or you can copy the message and send it yourself.
+
+<img src="./screenshots/global-shortcut.png" width="400" />
 
 ## 🚀 Getting Started
 
@@ -30,17 +65,44 @@ You will need an OpenAI account to access the ChatGPT API.
 
 ### Create a Slack App
 
-The Slack app will be used to listen for request in Slack and post messages back into Slack.
+The Slack app will be used to listen for request in Slack and post messages back into Slack. In order to support all of slack-chatgpt's features, there are a couple of steps needed. However, you can also choose to setup just the features you need.
 
-1. Create a Slack app [here](https://api.slack.com/apps).
-2. Enable Event Subscriptions and specify the URL to your Cloudflare Worker followed by the path `/events`, e.g. `https://slack-chatgpt.shapehq.workers.dev/events`.
-3. Subscribe to the `app_mention` and `message.im` event names.
-4. Enable Interactivity and specify the URL to your Cloudflare Worker followed by the path `/shortcuts`, e.g. `https://slack-chatgpt.shapehq.workers.dev/shortcuts`.
-5. Add a Shortcut with the callback ID `ask_chatgpt_shortcut`.
-6. Add the Bots feature to the Slack app.
-7. Add the `app_mentions:read`, `chat:write`, `commands`, `im:history`, and `chat:write.public` scopes to the bot.
-8. Take note of the bot's OAuth token. This is used to post messages back into Slack.
-9. Finally, take note of the signing secret. We will need this later to verify that requests are coming from Slack.
+Start by creating a Slack app on [api.slack.com/apps](https://api.slack.com/apps). You are free to choose any name for the app that fits your needs.
+
+Make sure to add the Bots feature to the Slack app and add the following scopes:
+
+- `app_mentions:read`
+- `chat:write`
+- `commands`
+- `im:history`
+- `chat:write.public`
+
+Take note of your bot's OAuth token and your app's signing secret as you will need [add bot to your Cloudflare worker later](https://github.com/shapehq/slack-chatgpt#add-your-secrets-to-the-cloudflare-worker).
+
+#### Responding to Mentions and Direct Messages
+
+In order for the bot to respond to mentions and direct messages, you must enable Event Subscriptions in your Slack app and pass the URL to your Cloudflare Worker followed by the path `/events`, e.g. `https://slack-chatgpt.shapehq.workers.dev/events`.
+
+Make sure to subscribe to the following events:
+
+- `app_mention`
+- `message.im`
+
+#### Enabling the Slash Command
+
+Add a slash command to your Slack app. You are free to choose the command, description, and usage hint that fits your needs but make sure to set the URL to your Cloudflare Worker followed by the path `/commands`, e.g. `https://slack-chatgpt.shapehq.workers.dev/commands`.
+
+#### Adding the Shortcut to Messages
+
+In order to respond to a message using ChatGPT, you must enable interactivity on your Slack app. Make sure to set the URL to your Cloudflare Worker followed by the path `/interactivity`, e.g. `https://slack-chatgpt.shapehq.workers.dev/interactivity`.
+
+Then create a new shortcut and select "On messages" when asked about where the shortcut should appear. You are free to choose the name and description that fit your needs but make sure to set the callback ID to `ask_chatgpt_on_message`.
+
+#### Adding the Global Shortcut
+
+To add the global shortcut to your workspace, you must enable interactivity on your Slack app. You may have already done this when adding the shortcut to messages. When enabling interactivity, you should make sure to set the URL to your Cloudflare Worker followed by the path `/interactivity`, e.g. `https://slack-chatgpt.shapehq.workers.dev/interactivity`.
+
+Then create a new shortcut and select "Global" when asked about where the shortcut should appear. You are free to choose the name and description that fit your needs but make sure to set the callback ID to `ask_chatgpt_global`.
 
 ### Add Your Secrets to the Cloudflare Worker
 
