@@ -26,10 +26,10 @@ function getEndpoint(pathname: string, env: Env): Endpoint | null {
   const pathComponents = pathname.slice(1).split("/").filter(e => e.length > 0)
   if (pathComponents.length == 1 && pathComponents[0] == "events") {
     return CompositionRoot.getSlackEventsEndpoint(env.OPENAI_API_KEY, env.SLACK_TOKEN)
-  } else if (pathComponents.length == 1 && pathComponents[0] == "interactivity") {
-    return CompositionRoot.getSlackInteractivityEndpoint(env.OPENAI_API_KEY, env.SLACK_TOKEN)
   } else if (pathComponents.length == 1 && pathComponents[0] == "commands") {
     return CompositionRoot.getSlackCommandsEndpoint(env.OPENAI_API_KEY, env.SLACK_TOKEN)
+  } else if (pathComponents.length == 1 && pathComponents[0] == "interactivity") {
+    return CompositionRoot.getSlackInteractivityEndpoint(env.OPENAI_API_KEY, env.SLACK_TOKEN)
   } else {
     return null
   }

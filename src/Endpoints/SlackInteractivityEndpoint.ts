@@ -18,17 +18,16 @@ export class SlackInteractivityEndpoint implements Endpoint {
   }
   
   async fetch(request: Request, ctx: ExecutionContext): Promise<Response> {
-   if (request.method == "POST") {
-     return await this.handlePostRequest(request, ctx)
-   } else {
-     return ResponseFactory.badRequest("Unsupported HTTP method: " + request.method)
-   }
+    if (request.method == "POST") {
+      return await this.handlePostRequest(request, ctx)
+    } else {
+      return ResponseFactory.badRequest("Unsupported HTTP method: " + request.method)
+    }
   }
   
   private async handlePostRequest(request: Request, ctx: ExecutionContext): Promise<Response> {
     const body = await readRequestBody(request)
     const payload = JSON.parse(body.payload)
-    console.log(JSON.stringify(payload, null, 2))
     if (payload.type == SlackEventType.MESSAGE_ACTION) {
       return await this.handleMessageAction(payload, ctx)
     } else if (payload.type == SlackEventType.SHORTCUT) {
@@ -125,15 +124,10 @@ export class SlackInteractivityEndpoint implements Endpoint {
   
   private async postAnswer(prompt: string, channel: string, threadTs?: string) {
     const answer = await this.chatGPTClient.getResponse(prompt)
-    try {
     await this.slackClient.postMessage({
       text: answer, 
       channel: channel, 
       thread_ts: threadTs
     })
-    } catch (error) {
-      console.log(error)
-      throw error
-    }
   }
 }
