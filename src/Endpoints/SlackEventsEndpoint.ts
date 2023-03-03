@@ -15,11 +15,11 @@ export class SlackEventsEndpoint implements Endpoint {
   }
   
   async fetch(request: Request, ctx: ExecutionContext): Promise<Response> {
-   if (request.method == "POST") {
-     return await this.handlePostRequest(request)
-   } else {
-     return ResponseFactory.badRequest("Unsupported HTTP method: " + request.method)
-   }
+    if (request.method == "POST") {
+      return await this.handlePostRequest(request)
+    } else {
+      return ResponseFactory.badRequest("Unsupported HTTP method: " + request.method)
+    }
   }
   
   private async handlePostRequest(request: Request): Promise<Response> {
