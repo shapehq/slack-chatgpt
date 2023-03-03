@@ -2,7 +2,7 @@
 <img src="./screenshots/header.jpeg" width="700" alt="Screenshot of a conversation between a person and ChatGPT" />
 <h3>Integrate <a href="https://openai.com/blog/chatgpt" target="_blank">ChatGPT</a> into Slack using a Slack app hosted on <a href="https://workers.cloudflare.com" target="_blank">Cloudflare Workers</a>.</h3>
 
-✨ Features&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;🚀 Getting Started&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;💻 Running the Project Locally&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;Built with ❤️ by Shape</div>
+[✨ Features](https://github.com/shapehq/slack-chatgpt/#-features)&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;[🚀 Getting Started](https://github.com/shapehq/slack-chatgpt/#-getting-started)&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;[💻 Running the Project Locally](https://github.com/shapehq/slack-chatgpt/#-running-the-project-locally)&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;[Built with ❤️ by Shape](https://github.com/shapehq/slack-chatgpt/#built-with-%EF%B8%8F-by-shape)</div>
 
 ## ✨ Features
 
@@ -77,7 +77,7 @@ Make sure to add the Bots feature to the Slack app and add the following scopes:
 - `im:history`
 - `chat:write.public`
 
-Take note of your bot's OAuth token and your app's signing secret as you will need [add bot to your Cloudflare worker later](https://github.com/shapehq/slack-chatgpt#add-your-secrets-to-the-cloudflare-worker).
+Take note of your bot's OAuth token and your app's signing secret as you will need [add both to your Cloudflare worker later](https://github.com/shapehq/slack-chatgpt#add-your-secrets-to-the-cloudflare-worker).
 
 #### Responding to Mentions and Direct Messages
 
