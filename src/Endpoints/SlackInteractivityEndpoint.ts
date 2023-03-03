@@ -124,15 +124,10 @@ export class SlackInteractivityEndpoint implements Endpoint {
   
   private async postAnswer(prompt: string, channel: string, threadTs?: string) {
     const answer = await this.chatGPTClient.getResponse(prompt)
-    try {
     await this.slackClient.postMessage({
       text: answer, 
       channel: channel, 
       thread_ts: threadTs
     })
-    } catch (error) {
-      console.log(error)
-      throw error
-    }
   }
 }
