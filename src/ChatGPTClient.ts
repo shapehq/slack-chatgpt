@@ -1,6 +1,4 @@
-import { ChatGPTMessage } from "./ChatGPTMessage"
-import { ChatGPTResponse } from "./ChatGPTResponse"
-import { NetworkService } from "../NetworkService/NetworkService"
+import { NetworkService } from "./NetworkService/NetworkService"
 
 export class ChatGPTClient {
   networkService: NetworkService
@@ -11,7 +9,7 @@ export class ChatGPTClient {
     this.apiKey = apiKey
   }
   
-  async getResponse(prompt: string): Promise<ChatGPTResponse> {
+  async getResponse(prompt: string): Promise<string> {
     const url = "https://api.openai.com/v1/chat/completions"
     const body = {
       model: "gpt-3.5-turbo",
@@ -25,10 +23,11 @@ export class ChatGPTClient {
     }
     try {
       const response = await this.networkService.post(url, body, headers)
-      if ("error" in response) {
-        throw new Error(response.error.message)
-      } else if ("choices" in response && response.choices.length > 0) {
-        return response.choices[0].message
+      const json = await response.json()
+      if ("error" in json) {
+        throw new Error(json.error.message)
+      } else if ("choices" in json && json.choices.length > 0) {
+        return json.choices[0].message.content
       } else {
         throw new Error("Did not receive any message choices")
       }

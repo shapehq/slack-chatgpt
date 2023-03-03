@@ -19,4 +19,13 @@ export class ResponseFactory {
       statusText: "Unauthorized"
     })
   }
+  
+  static json(body: any): Response {
+    const json = JSON.stringify(body, null, 2);
+    return new Response(json, {
+      headers: {
+        "content-type": "application/json;charset=UTF-8"
+      }
+    })
+  }
 }
