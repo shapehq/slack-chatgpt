@@ -12,31 +12,31 @@ slack-chatgpt can be used to interact with ChatGPT in several ways on Slack.
 
 When mentioning the bot, it will post a reply in a thread so it does not clutter the conversation.
 
-<img src="./screenshots/mention.png" width="500" />
+<a href="./screenshots/mention.png" target="_blank"><img src="./screenshots/mention.png" width="300" /></a>
 
 #### Direct Messages
 
 People in the workspace can write messages messages to the bot in which case it replies directly within the conversation.
 
-<img src="./screenshots/dm.png" width="500" />
+<a href="./screenshots/dm.png" target="_blank"><img src="./screenshots/dm.png" width="300" /></a>
 
 #### Slash Command
 
 Use the slash command to ask ChatGPT a question and have it reply within the conversation.
 
-<img src="./screenshots/command.png" width="300" />
+<a href="./screenshots/command.png" target="_blank"><img src="./screenshots/command.png" width="300" /></a>
 
 #### Shortcut on Message
 
 The shortcut on messages can be used to answer a message using ChatGPT.
 
-<img src="./screenshots/shortcut-on-message.png" width="500" />
+<a href="./screenshots/shortcut-on-message.png" target="_blank"><img src="./screenshots/shortcut-on-message.png" width="300" /></a>
 
 #### Global Shortcut
 
 The global shortcut can be used to have ChatGPT help you write a message and then send that message to a channel or you can copy the message and send it yourself.
 
-<img src="./screenshots/global-shortcut.png" width="400" />
+<a href="./screenshots/global-shortcut.png" target="_blank"><img src="./screenshots/global-shortcut.png" width="300" /></a>
 
 ## 🚀 Getting Started
 
