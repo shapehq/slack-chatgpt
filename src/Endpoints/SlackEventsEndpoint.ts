@@ -26,16 +26,16 @@ export class SlackEventsEndpoint implements Endpoint {
     const body = await readRequestBody(request)
     console.log(JSON.stringify(body, null, 2))
     if (body.type == SlackEventType.URL_VERIFICATION) {
-     return new Response(body.challenge)
-   } else if (body.type == SlackEventType.EVENT_CALLBACK) {
-     await this.handleEventCallback(body.event)
-     return new Response()
-   } else {
-     return new Response("Unsupported request from from Slack of type " + body.type, {
-       status: 400, 
-       statusText: "Bad Request"
-     })
-   }
+      return new Response(body.challenge)
+    } else if (body.type == SlackEventType.EVENT_CALLBACK) {
+      await this.handleEventCallback(body.event)
+      return new Response()
+    } else {
+      return new Response("Unsupported request from from Slack of type " + body.type, {
+        status: 400, 
+        statusText: "Bad Request"
+      })
+    }
   }
   
   private async handleEventCallback(event: any) {
