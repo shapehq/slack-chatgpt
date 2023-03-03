@@ -1,22 +1,20 @@
-import { Bot } from "./Bot"
-import { ChatGPTClient } from "./ChatGPT/ChatGPTClient"
+import { ChatGPTClient } from "./ChatGPTClient"
 import { NetworkService } from "./NetworkService/NetworkService"
 import { NetworkServiceLive } from "./NetworkService/NetworkServiceLive"
 import { SlackClient } from "./Slack/SlackClient"
 import { SlackEventsEndpoint } from "./Endpoints/SlackEventsEndpoint"
-import { SlackShortcutsEndpoint } from "./Endpoints/SlackShortcutsEndpoint"
+import { SlackInteractivityEndpoint } from "./Endpoints/SlackInteractivityEndpoint"
 
 export class CompositionRoot {
   static getSlackEventsEndpoint(openAIAPIKey: string, slackToken: string): SlackEventsEndpoint {
-    return new SlackEventsEndpoint(this.getBot(openAIAPIKey, slackToken))
+    return new SlackEventsEndpoint(
+      this.getChatGPTClient(openAIAPIKey),
+      this.getSlackClient(slackToken)
+    )
   }
   
-  static getSlackShortcutsEndpoint(openAIAPIKey: string, slackToken: string): SlackShortcutsEndpoint {
-    return new SlackShortcutsEndpoint(this.getBot(openAIAPIKey, slackToken))
-  }
-  
-  private static getBot(openAIAPIKey: string, slackToken: string): Bot {
-    return new Bot(
+  static getSlackInteractivityEndpoint(openAIAPIKey: string, slackToken: string): SlackInteractivityEndpoint {
+    return new SlackInteractivityEndpoint(
       this.getChatGPTClient(openAIAPIKey),
       this.getSlackClient(slackToken)
     )

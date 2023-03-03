@@ -1,3 +1,3 @@
-name = "slack-chatgpt-f604c73a-b90f-11ed-afa1-0242ac120002"
+name = "slack-chatgpt"
 main = "src/index.ts"
 compatibility_date = "2023-03-02"

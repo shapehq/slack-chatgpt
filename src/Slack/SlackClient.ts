@@ -1,4 +1,6 @@
 import { NetworkService } from "../NetworkService/NetworkService"
+import { SlackMessage } from "./SlackMessage"
+import { SlackResponse } from "./SlackResponse"
 
 export class SlackClient {
   networkService: NetworkService
@@ -9,34 +11,40 @@ export class SlackClient {
     this.token = token
   }
   
-  async postMessage(text: string, channel: String, threadTs: string | null): Promise<void> {
-    const response = await this.networkService.post("https://slack.com/api/chat.postMessage", {
-      text: text,
-      channel: channel,
-      thread_ts: threadTs
-    }, {
-      "Authorization": "Bearer " + this.token
+  async postMessage(message: SlackMessage): Promise<void> {
+    await this.post("https://slack.com/api/chat.postMessage", message)
+  }
+  
+  async postResponse(responseURL: string, response: SlackResponse): Promise<void> {
+    await this.post(responseURL, response)
+  }
+  
+  async deleteMessage(responseURL: string): Promise<void> {
+    await this.post(responseURL, {
+      delete_original: true
     })
-    this.processResponse(response)
   }
   
   async openView(triggerId: string, view: any): Promise<void> {
-    const response = await this.networkService.post("https://slack.com/api/views.open", {
+    await this.post("https://slack.com/api/views.open", {
       trigger_id: triggerId,
       view: view
-    }, {
-      "Authorization": "Bearer " + this.token
     })
-    this.processResponse(response)
   }
   
   async updateView(viewId: string, view: any): Promise<void> {
-    const response = await this.networkService.post("https://slack.com/api/views.update", {
+    await this.post("https://slack.com/api/views.update", {
       view_id: viewId,
       view: view
-    }, {
+    })
+  }
+  
+  private async post(url: string, body: any) {
+    const response = await this.networkService.post(url, body, {
       "Authorization": "Bearer " + this.token
     })
+    console.log(url)
+    console.log(await response.text())
     this.processResponse(response)
   }
   

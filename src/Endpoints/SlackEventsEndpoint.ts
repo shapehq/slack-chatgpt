@@ -1,14 +1,17 @@
-import { Bot } from "../Bot"
+import { ChatGPTClient } from "../ChatGPTClient"
 import { Endpoint } from "./Endpoint"
 import { readRequestBody } from "../readRequestBody"
 import { ResponseFactory } from "../ResponseFactory"
+import { SlackClient } from "../Slack/SlackClient"
 import { SlackEventType } from "../Slack/SlackEventType"
 
 export class SlackEventsEndpoint implements Endpoint {
-  bot: Bot
+  chatGPTClient: ChatGPTClient
+  slackClient: SlackClient
   
-  constructor(bot: Bot) {
-    this.bot = bot
+  constructor(chatGPTClient: ChatGPTClient, slackClient: SlackClient) {
+    this.chatGPTClient = chatGPTClient
+    this.slackClient = slackClient
   }
   
   async fetch(request: Request, ctx: ExecutionContext): Promise<Response> {
@@ -21,6 +24,7 @@ export class SlackEventsEndpoint implements Endpoint {
   
   private async handlePostRequest(request: Request): Promise<Response> {
     const body = await readRequestBody(request)
+    console.log(JSON.stringify(body, null, 2))
     if (body.type == SlackEventType.URL_VERIFICATION) {
      return new Response(body.challenge)
    } else if (body.type == SlackEventType.EVENT_CALLBACK) {
@@ -36,11 +40,20 @@ export class SlackEventsEndpoint implements Endpoint {
   
   private async handleEventCallback(event: any) {
     if (event.type == SlackEventType.APP_MENTION) {
-      await this.bot.postReply(event.text, event.channel, event.ts)
+      const answer = await this.chatGPTClient.getResponse(event.text)
+      await this.slackClient.postMessage({
+        text: answer,
+        channel: event.channel,
+        thread_ts: event.ts
+      })
     } else if (event.type == SlackEventType.MESSAGE) {
+      // Make sure the message was not sent by a bot. If we do not have this check the bot will keep a conversation going with itself.
       if (event.bot_profile == null) {
-        // Make sure the message was not sent by a bot. If we do not have this check the bot will keep a conversation going with itself.
-        await this.bot.postReply(event.text, event.channel, null)
+        const answer = await this.chatGPTClient.getResponse(event.text)
+        await this.slackClient.postMessage({
+          text: answer,
+          channel: event.channel
+        })
       }
     } else {
       throw new Error("Unexpected Slack event of type " + event.type)

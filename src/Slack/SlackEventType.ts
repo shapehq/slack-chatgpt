@@ -1,9 +1,10 @@
 export const SlackEventType = {
-  URL_VERIFICATION: "url_verification",
-  EVENT_CALLBACK: "event_callback",
   APP_MENTION: "app_mention",
-  MESSAGE: "message",
-  SHORTCUT: "shortcut",
   BLOCK_ACTIONS: "block_actions",
+  EVENT_CALLBACK: "event_callback",
+  MESSAGE: "message",
+  MESSAGE_ACTION: "message_action",
+  SHORTCUT: "shortcut",
+  URL_VERIFICATION: "url_verification",
   VIEW_SUBMISSION: "view_submission"
 }
