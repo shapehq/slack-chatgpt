@@ -43,8 +43,6 @@ export class SlackClient {
     const response = await this.networkService.post(url, body, {
       "Authorization": "Bearer " + this.token
     })
-    console.log(url)
-    console.log(await response.text())
     this.processResponse(response)
   }
   

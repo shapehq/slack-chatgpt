@@ -24,7 +24,6 @@ export class SlackEventsEndpoint implements Endpoint {
   
   private async handlePostRequest(request: Request): Promise<Response> {
     const body = await readRequestBody(request)
-    console.log(JSON.stringify(body, null, 2))
     if (body.type == SlackEventType.URL_VERIFICATION) {
       return new Response(body.challenge)
     } else if (body.type == SlackEventType.EVENT_CALLBACK) {
