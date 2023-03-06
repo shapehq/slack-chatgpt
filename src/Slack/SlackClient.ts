@@ -15,6 +15,10 @@ export class SlackClient {
     await this.post("https://slack.com/api/chat.postMessage", message)
   }
   
+  async postEphemeralMessage(message: SlackMessage): Promise<void> {
+    await this.post("https://slack.com/api/chat.postEphemeral", message)
+  }
+  
   async postResponse(responseURL: string, response: SlackResponse): Promise<void> {
     await this.post(responseURL, response)
   }
