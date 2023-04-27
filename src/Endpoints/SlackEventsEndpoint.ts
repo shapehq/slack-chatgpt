@@ -9,12 +9,12 @@ import { SlackLoadingMessage } from "../Slack/SlackLoadingMessage"
 export class SlackEventsEndpoint implements Endpoint {
   chatGPTClient: ChatGPTClient
   slackClient: SlackClient
-  
+
   constructor(chatGPTClient: ChatGPTClient, slackClient: SlackClient) {
     this.chatGPTClient = chatGPTClient
     this.slackClient = slackClient
   }
-  
+
   async fetch(request: Request, ctx: ExecutionContext): Promise<Response> {
     if (request.method == "POST") {
       return await this.handlePostRequest(request, ctx)
@@ -22,7 +22,7 @@ export class SlackEventsEndpoint implements Endpoint {
       return ResponseFactory.badRequest("Unsupported HTTP method: " + request.method)
     }
   }
-  
+
   private async handlePostRequest(request: Request, ctx: ExecutionContext): Promise<Response> {
     const body = await readRequestBody(request)
     if (body.type == SlackEventType.URL_VERIFICATION) {
@@ -40,12 +40,12 @@ export class SlackEventsEndpoint implements Endpoint {
       }
     } else {
       return new Response("Unsupported request from from Slack of type " + body.type, {
-        status: 400, 
+        status: 400,
         statusText: "Bad Request"
       })
     }
   }
-  
+
   private async postEphemeralLoadingMessage(eventType: any, user: string, channel: string, threadTs: string | null) {
     const message: any = {
       text: SlackLoadingMessage.getRandom(),
@@ -57,9 +57,14 @@ export class SlackEventsEndpoint implements Endpoint {
     }
     await this.slackClient.postEphemeralMessage(message)
   }
-  
+
   private async postAnswer(eventType: any, channel: string, threadTs: string, prompt: string) {
-    const answer = await this.chatGPTClient.getResponse(prompt)
+    let answer;
+    try {
+      answer = await this.chatGPTClient.getResponse(prompt)
+    } catch (e) {
+      answer = '申し訳ありません。ChatGPTとの通信にエラーが発生したか、時間が長すぎるため中断しました。もう一度話しかけてください。'
+    }
     const message: any = {
       text: answer,
       channel: channel
@@ -69,7 +74,7 @@ export class SlackEventsEndpoint implements Endpoint {
     }
     await this.slackClient.postMessage(message)
   }
-  
+
   private isEventFromBot(event: any): boolean {
     return event.bot_profile != null
   }
