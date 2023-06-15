@@ -12,7 +12,7 @@ export class ChatGPTClient {
   async getResponse(prompt: string): Promise<string> {
     const url = "https://api.openai.com/v1/chat/completions"
     const body = {
-      model: "gpt-3.5-turbo",
+      model: "gpt-3.5-turbo-0613",
       messages: [
         {"role": "system", "content": "あなたは親切なアシスタントです。返答は日本語で行ってください。"},
         {"role": "user", "content": prompt}
